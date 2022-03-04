@@ -3,7 +3,7 @@ import numpy as np
 import torch
 import torch.nn as nn 
 from torch.utils.data import Dataset, DataLoader
-from model import NeuralNet
+from model import AdvancedNeuralNet
 from nltk_utils import tokenize, stem, bag_of_words
 with open('intents.json', 'r') as f:
     intents = json.load(f)
@@ -72,8 +72,9 @@ hidden_size = 8
 output_size = len(tags)
 learning_rate = 0.001
 num_epochs = 1000
-
+num_layers = 2 
 input_size = len(X_train[0])
+
 print("Below is the Input Size of our Neural Network")
 print(input_size, len(all_words))
 print("Below is the output size of our neural network, which should match the amount of tags ")
@@ -84,12 +85,17 @@ train_loader = DataLoader(dataset=dataset, batch_size=batch_size, shuffle=True)
 
 #The below function helps push to GPU for training if available
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = NeuralNet(input_size, hidden_size, output_size).to(device)
+model = AdvancedNeuralNet(input_size, hidden_size, num_layers, output_size).to(device)
 
 #Loss and Optimizer
 
 #TODO: Experiment with another optimizer and note any differences in loss of our model. Does the final loss increase or decrease? 
 #TODO CONT: Speculate on why your changed optimizer may increase or decrease final loss
+"""
+I tried to change the optimizer to SGD and it increased the loss by a large number. 
+I think this happened because SGD is a gradient descent algorithm and its taking its 
+sweet time to go over the best way to handle this simple problem.
+"""
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
@@ -99,7 +105,7 @@ for epoch in range(num_epochs):
         labels = labels.to(device)
 
         #Forward pass
-        outputs = model(words)
+        outputs = model(words, num_layers = num_layers)
         loss = criterion(outputs, labels)
 
         #backward and optimizer step 
@@ -111,7 +117,7 @@ for epoch in range(num_epochs):
 
     #Print progress of epochs and loss for every 100 epochs
     if (epoch +1) % 100 == 0:
-        print(f'epoch {epoch+1}/{num_epochs}, loss={loss.item():.4f}')
+        print(f'Epoch {epoch+1}/{num_epochs}, loss={loss.item():.4f}')
 
 print(f'final loss, loss={loss.item():.4f}')
 
