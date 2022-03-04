@@ -60,6 +60,13 @@ class ChatDataset(Dataset):
         return self.n_samples
 
 #TODO: How do these hyperparameters affect optimization of our chatbot? 
+        """
+        batch_size affects the number of samples we are training on at a time
+        hidden_size affects the number of nodes in the hidden layer
+        output_size affects the number of nodes in the output layer
+        learning_rate affects the speed at which we are adjusting our weights
+        num_epochs affects the number of times we are going over the process
+        """
 batch_size = 8
 hidden_size = 8
 output_size = len(tags)
