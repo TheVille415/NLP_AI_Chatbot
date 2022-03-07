@@ -40,13 +40,23 @@ class AdvancedNeuralNet(nn.Module):
         self.fc = nn.Linear(hidden_size, num_classes)
         
     def forward(self, x, num_layers):
+        # float makes it compatible with the array
+        x = x.unsqueeze(0).float()
         self.num_layers = num_layers        
         # initial hidden state
-        h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device)   
-        c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device)   
+        # h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device)   
+        # c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(device)   
+        
+        # passing in the array bit by bit
+        h0 = torch.zeros(self.num_layers, 1, self.hidden_size).to(device)   
+        c0 = torch.zeros(self.num_layers, 1, self.hidden_size).to(device)
               
         out, _= self.lstm(x, (h0, c0))
         # batch size, seq_len, hidden_size
-        out = out[:, -1, :]
+        # out = reshape the array back into rows from colums
+        out = out.reshape(-1, 8)
+        # we got what we wanted
         out = self.fc(out)
         return out
+# it was mad that we sent the whole batch to the model
+# it only wanted unit by unit

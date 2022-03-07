@@ -81,6 +81,45 @@
           "Why did the hipster burn his mouth? He drank the coffee before it was cool.",
           "What did the buffalo say when his son left for college? Bison."
         ]
+      },
+      {
+        "tag": "weather",
+        "patterns": [
+          "Do you know if its going to be cold outside?",
+          "How hot is going to be today?",
+          "Is it going to rain?"
+        ],
+        "responses": [
+          "Yes! It's going to snow!",
+          "Today is going to be a scorcher!",
+          "Yes! It's going to rain!"
+        ]
+      },
+      {
+        "tag": "play",
+        "patterns": [
+          "Want to play a game?",
+          "Are you free tonight to play games?",
+          "IS IT GAME TIME?"
+        ],
+        "responses": [
+          "I do want to play a game!",
+          "Tonight I am not free!",
+          "YES IT IS!"
+        ]
+      },
+      {
+        "tag": "tired",
+        "patterns": [
+          "Are you tired?",
+          "Feeling sleepy?",
+          "Is it your bedtime?"
+        ],
+        "responses": [
+          "I am so tired.",
+          "I am so sleepy.",
+          "It is my bedtime."
+        ]
       }
     ]
   }

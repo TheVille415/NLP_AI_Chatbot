@@ -1,0 +1,23 @@
+Edits made to train.py
+changing the hyperparameters of the model
+
+learning rate: 0.01
+- final loss, loss=0.0004
+
+num_epochs = 1100
+- final loss, loss=0.0112
+
+batch_size = 10
+- final loss, loss=0.0299
+
+num_layers = 4 
+- final loss, loss=0.4820
+
+
+learning_rate = 0.01
+and
+num_epochs = 1200
+- final loss, loss=0.0002
+
+Overall working with these hyperparameters:
+learning rate and the number of epochs had the highest impact on loss.

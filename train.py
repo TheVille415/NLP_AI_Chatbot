@@ -105,6 +105,7 @@ for epoch in range(num_epochs):
         labels = labels.to(device)
 
         #Forward pass
+        # print(words.shape)
         outputs = model(words, num_layers = num_layers)
         loss = criterion(outputs, labels)
 

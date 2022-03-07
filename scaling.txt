@@ -1,0 +1,7 @@
+I think the easiest way to scale this project would be to use as a simple webapp.
+Since we can edit the data being used in our json file we can train this to be used
+on most any website. From here we make the flask templating, get the app trained.
+We can then take user input from the webapp and use it to talk to our model. Then 
+we return the results to the user. Since chatbots are so dymanic this app could also
+be hosted on a server and used to run bots in severs for either slack or discord.
+With NLP the possibilities are endless for apps!
